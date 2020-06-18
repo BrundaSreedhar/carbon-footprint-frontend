@@ -21,9 +21,11 @@ export class UserFormComponent implements OnInit {
   destAddress: string;
   modeString: string = 'walking';
   vehicleString: string;
+  seatTypes: Array<string> = undefined;
   distance: string = "0 km";
   emissions: string = "0 g";
   vehicleList: Array<string> = undefined;
+  seatType: string;
 
   constructor(private dataService: DataService,
     private geocodeService: GeocodeService,
@@ -77,7 +79,7 @@ export class UserFormComponent implements OnInit {
 
   computeCF() {
     
-    this.httpService.computeDistance(this.source, this.destination, this.modeString, this.vehicleString).subscribe(
+    this.httpService.computeEmissions(this.source, this.destination, this.modeString, this.vehicleString, this.seatType).subscribe(
       (res:any) => {
         this.distance = res.distance;
         this.emissions = res.emissions;
@@ -91,7 +93,10 @@ export class UserFormComponent implements OnInit {
       break;
       case 'transit':  this.vehicleList = ["bus", "train"];
       break;
+      case 'flight' : this.seatTypes = ["economy", "first class", "premium economy", "business class"];
+      break;
       default: this.vehicleList = undefined;
+               this.seatTypes = undefined; 
       break;
   }
 }

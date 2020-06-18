@@ -1,26 +1,5 @@
 <div>
-  <!-- <div class="row">
-    <div class="col-md-6">
-      <input type="number" [(ngModel)]="source.latitude" />
-    </div>
-    <div class="col-md-6">
-      <input type="number" [(ngModel)]="source.longitude" />
-    </div>
-    <button type="button" class="btn btn-primary" (click)="onSourceChange()">Change source</button>
-  </div>
-  <hr>
-  <div class="row">
-    <div class="col-md-6">
-      <input type="number" [(ngModel)]="destination.latitude" />
-    </div>
-    <div class="col-md-6">
-      <input type="number" [(ngModel)]="destination.longitude" />
-    </div>
-    <button type="button" class="btn btn-primary" (click)="onDestinationChange()">Change destination</button>
-  </div>
-
-  <hr> -->
-
+ 
   <div class="row">
     <div class="col-sm-12">
       <label>Enter Source address</label>
@@ -63,6 +42,7 @@
         <option value="driving">Drive</option>
         <option value="bicycling">Cycling</option>
         <option value="transit">Transit</option>
+        <option value="flight">Flight</option>
       </select>
     </div>
   </div>
@@ -73,6 +53,8 @@
     </div>
   </div>
   <hr>
+
+
   <div class="row" *ngIf="vehicleList">
     <div class="col-sm-12">
       <label for="vehicle">Vehicle</label>
@@ -81,7 +63,18 @@
       </select>
     </div>
   </div>
+
   <hr>
+  <div class="row" *ngIf="seatTypes">
+    <div class="col-sm-12">
+      <label for="seatType">Select Seat Type</label>
+      <select id="seatType" [(ngModel)]="seatType">
+        <option *ngFor="let seatType of seatTypes" value={{seatType}}>{{seatType}}</option>
+      </select>
+    </div>
+  </div>
+  <hr>
+
   <div class="row">
     <div class="col-sm-12">
       <button type="button" class="btn btn-primary" (click)="computeCF()">Compute Emissions</button>
